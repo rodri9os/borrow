@@ -27,11 +27,11 @@ class Endereco(models.Model):
 class Pessoa(models.Model):
     # user = models.OneToOneField(User, related_name='profile',on_delete=models.CASCADE)
     #nome = models.CharField(max_length=200, name='Nome')
-    nome = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    nome = models.ForeignKey(User, on_delete=models.CASCADE)
     endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE)
 
     # def __str__(self):
-    #     return self.nome
+    #     return self.name
 
 
 

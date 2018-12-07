@@ -1,29 +1,31 @@
 from django.shortcuts import render, redirect
 #from django.contrib.auth import authenticate, login
-from .forms import PessoaForm
-from .models import Pessoa
+from .forms import PessoaForm, EnderecoForm, ItemForm
+from .models import Pessoa, Endereco, Item
+
 
 # Create your views here.
 def index(request):
     return render(request, 'core/index.html', {})
 
+
 def list_pessoas(request):
     pessoas =  Pessoa.objects.all()
-    return render(request, "core/list_pessoas.html", {'pessoas':pessoas})
+    return render(request, "core/list_pessoas.html", {'pessoas': pessoas})
+
 
 def new_pessoas(request):
     form = PessoaForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            return redirect('url_list_pessoas')
+            return redirect('url_list_enderecos')
             # listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
 
-    return render(request, 'core/new_pessoas.html', {'form': form})
+    return render(request, 'core/new_enderecos.html', {'form': form})
 
 
-def edit_pessoas(request,pk):
-    data = {}
+def edit_pessoas(request, pk):
     pessoa = Pessoa.objects.get(pk=pk)
     form = PessoaForm(request.POST or None, instance=pessoa)
 
@@ -35,44 +37,83 @@ def edit_pessoas(request,pk):
         # data['transacao'] = transacao
     return render(request, 'core/edit_pessoas.html', {'form': form})
 
-def delete_pessoas(request,pk):
+
+def delete_pessoas(request, pk):
 #    return render(request, 'core/index.html', {})
     pessoa = Pessoa.objects.get(pk=pk)
     pessoa.delete()
     return redirect('url_list_pessoas')
 
 
+def list_enderecos(request):
+    enderecos = Endereco.objects.all()
+    return render(request, "core/list_enderecos.html", {'enderecos': enderecos})
+
+
+def new_enderecos(request):
+    form = EnderecoForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('url_list_pessoas')
+            # listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
+
+    return render(request, 'core/new_enderecos.html', {'form': form})
+
+
+def edit_enderecos(request, pk):
+    endereco = Endereco.objects.get(pk=pk)
+    form = EnderecoForm(request.POST or None, instance=endereco)
+
+    if form.is_valid():
+        form.save()
+        return redirect('url_list_enderecos')
+        #listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
+
+    return render(request, 'core/edit_enderecos.html', {'form': form})
+
+
+def delete_enderecos(request, pk):
+    endereco = Endereco.objects.get(pk=pk)
+    endereco.delete()
+    return redirect('url_list_enderecos')
+
+
+def list_itens(request):
+    itens = Item.objects.all()
+    return render(request, "core/list_itens.html", {'itens': itens})
+
+
+def new_itens(request):
+    form = ItemForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('url_list_itens')
+            # listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
+
+    return render(request, 'core/new_itens.html', {'form': form})
+
+
+def edit_itens(request, pk):
+    item = Item.objects.get(pk=pk)
+    form = ItemForm(request.POST or None, instance=item)
+
+    if form.is_valid():
+        form.save()
+        return redirect('url_list_itens')
+        #listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
+
+    return render(request, 'core/edit_itens.html', {'form': form})
+
+
+def delete_itens(request, pk):
+    item = Item.objects.get(pk=pk)
+    item.delete()
+    return redirect('url_list_itens')
 
 
 
-
-    #pessoa = get_object_or_404(Pessoas, pk=pk)
-    # if request.method == "POST":
-    #     form = PessoaForm(request.POST, instance=pessoa)
-    #     if form.is_valid():
-    #         pessoa = form.save(commit=False)
-    #         pessoa.nome = request.user
-    #         pessoa.endereco = request.endereco
-    #         pessoa.save()
-    #         return redirect('core/edit_pessoa', pk=pessoa.pk)
-    #     else:
-    #         form = PessoaForm(instance=post)
-    #         return render(request, 'core/edit_pessoas.html', {'form':form})
-
-    #return render(request, 'core/index.html', {})
-
-    # post = get_object_or_404(Post, pk=pk)
-    # if request.method == "POST":
-    #     form = PostForm(request.POST, instance=post)
-    #     if form.is_valid():
-    #         post = form.save(commit=False)
-    #         post.author = request.user
-    #         post.published_date = timezone.now()
-    #         post.save()
-    #         return redirect('post_detail', pk=post.pk)
-    # else:
-    #     form = PostForm(instance=post)
-    # return render(request, 'core/post_edit.html', {'form': form})
 
 
 #def login_view(request):

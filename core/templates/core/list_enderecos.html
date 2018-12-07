@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+     <div class="post">
+         {% for endereco in enderecos %}
+             <div class="date">
+                <a class="btn btn-default" href=""> {{ endereco.Rua }} <span class="glyphicon glyphicon-pencil"></span></a>
+             </div>
+         {% endfor %}
+
+
+
+
+     </div>
+{% endblock %}

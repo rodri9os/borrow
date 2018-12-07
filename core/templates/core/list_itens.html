@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+     <div class="post">
+         {% for item in itens %}
+             <div class="date">
+                <a class="btn btn-default" href=""> {{ item.Nome }} <span class="glyphicon glyphicon-pencil"></span></a>
+             </div>
+         {% endfor %}
+
+
+
+
+     </div>
+{% endblock %}
