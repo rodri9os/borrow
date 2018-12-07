@@ -15,14 +15,20 @@ Including another URLconf
 """
 
 from django.conf.urls import url
+from django.urls import path
 from django.contrib import admin
 #from django.contrib.auth import views as auth_views
 from core import views
 
 urlpatterns = [
 #    url(r'^login/$', auth_views.login),
+    path('pessoa/', views.list_pessoas, name='url_list_pessoas'),
+    path('pessoa/new/', views.new_pessoas, name='url_new_pessoas'),
+    path('pessoa/<int:pk>/', views.edit_pessoas, name='url_edit_pessoas'),
+    path('pessoa/<int:pk>/delete/', views.delete_pessoas, name='url_delete_pessoas'),
     url(r'^$', views.index, name='Index'),
     url(r'^admin/', admin.site.urls),
+
 ]
 
 #from django.contrib import admin
