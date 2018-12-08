@@ -37,6 +37,11 @@ urlpatterns = [
     path('item/<int:pk>/', views.edit_itens, name='url_edit_itens'),
     path('item/<int:pk>/delete/', views.delete_itens, name='url_delete_itens'),
 
+    path('cessao/', views.list_cessoes, name='url_list_cessoes'),
+    path('cessao/new/', views.new_cessoes, name='url_new_cessoes'),
+    path('cessao/<int:pk>/', views.edit_cessoes, name='url_edit_cessoes'),
+    path('cessao/<int:pk>/delete/', views.delete_cessoes, name='url_delete_cessoes'),
+
     url(r'^$', views.index, name='Index'),
     url(r'^admin/', admin.site.urls),
 

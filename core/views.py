@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 #from django.contrib.auth import authenticate, login
-from .forms import PessoaForm, EnderecoForm, ItemForm
-from .models import Pessoa, Endereco, Item
+from .forms import PessoaForm, EnderecoForm, ItemForm, CessaoForm
+from .models import Pessoa, Endereco, Item, Cessao
 
 
 # Create your views here.
@@ -112,6 +112,39 @@ def delete_itens(request, pk):
     item.delete()
     return redirect('url_list_itens')
 
+
+def list_cessoes(request):
+    cessoes = Cessao.objects.all()
+    return render(request, "core/list_cessoes.html", {'cessoes': cessoes})
+
+
+def new_cessoes(request):
+    form = CessaoForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('url_list_cessoes')
+            # listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
+
+    return render(request, 'core/new_cessoes.html', {'form': form})
+
+
+def edit_cessoes(request, pk):
+    cessao = Cessao.objects.get(pk=pk)
+    form = CessaoForm(request.POST or None, instance=cessao)
+
+    if form.is_valid():
+        form.save()
+        return redirect('url_list_cessoes')
+        #listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
+
+    return render(request, 'core/edit_cessoes.html', {'form': form})
+
+
+def delete_cessoes(request, pk):
+    cessao = Cessao.objects.get(pk=pk)
+    cessao.delete()
+    return redirect('url_list_cessoes')
 
 
 
