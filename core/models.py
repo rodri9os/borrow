@@ -42,7 +42,7 @@ class Pessoa(models.Model):
 # Classe para registrar como está o emprestimo
 # solicitado, emprestado, esperando retirada, devolvido, esperando aprovação de devolução
 class Status(models.Model):
-    Descricao = models.CharField(
+    descricao = models.CharField(
         max_length=100,
         choices = (
         ('1','Solicitado'),

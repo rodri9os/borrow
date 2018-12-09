@@ -42,6 +42,16 @@ urlpatterns = [
     path('cessao/<int:pk>/', views.edit_cessoes, name='url_edit_cessoes'),
     path('cessao/<int:pk>/delete/', views.delete_cessoes, name='url_delete_cessoes'),
 
+    path('status/', views.list_status, name='url_list_status'),
+    path('status/new/', views.new_status, name='url_new_status'),
+    path('status/<int:pk>/', views.edit_status, name='url_edit_status'),
+    path('status/<int:pk>/delete/', views.delete_status, name='url_delete_status'),
+
+    path('emprestimo/', views.list_emprestimos, name='url_list_emprestimos'),
+    path('emprestimo/new/', views.new_emprestimos, name='url_new_emprestimos'),
+    path('emprestimo/<int:pk>/', views.edit_emprestimos, name='url_edit_emprestismos'),
+    path('emprestimo/<int:pk>/delete/', views.delete_emprestimos, name='url_delete_emprestimos'),
+
     url(r'^$', views.index, name='Index'),
     url(r'^admin/', admin.site.urls),
 

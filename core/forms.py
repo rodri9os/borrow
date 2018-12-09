@@ -34,7 +34,7 @@ class CessaoForm(forms.ModelForm):
         model = Cessao
         fields = '__all__'
 
-class Emprestimo(forms.ModelForm):
+class EmprestimoForm(forms.ModelForm):
     class Meta:
         model = Emprestimo
         fields = '__all__'

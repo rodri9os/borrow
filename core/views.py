@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 #from django.contrib.auth import authenticate, login
-from .forms import PessoaForm, EnderecoForm, ItemForm, CessaoForm
-from .models import Pessoa, Endereco, Item, Cessao
+from .forms import PessoaForm, EnderecoForm, ItemForm, CessaoForm, EmprestimoForm, StatusForm
+from .models import Pessoa, Endereco, Item, Cessao, Emprestimo, Status
 
 
 # Create your views here.
@@ -146,6 +146,74 @@ def delete_cessoes(request, pk):
     cessao.delete()
     return redirect('url_list_cessoes')
 
+
+def list_status(request):
+    status = Status.objects.all()
+    return render(request, "core/list_status.html", {'status': status})
+
+
+def new_status(request):
+    form = StatusForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('url_list_status')
+            # listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
+
+    return render(request, 'core/new_status.html', {'form': form})
+
+
+def edit_status(request, pk):
+    status = Status.objects.get(pk=pk)
+    form = StatusForm(request.POST or None, instance=emprestimo)
+
+    if form.is_valid():
+        form.save()
+        return redirect('url_list_status')
+        #listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
+
+    return render(request, 'core/edit_status.html', {'form': form})
+
+
+def delete_status(request, pk):
+    status = Status.objects.get(pk=pk)
+    status.delete()
+    return redirect('url_list_status')
+
+
+
+def list_emprestimos(request):
+    emprestimos = Emprestimo.objects.all()
+    return render(request, "core/list_emprestimos.html", {'emprestimos': emprestimos})
+
+
+def new_emprestimos(request):
+    form = EmprestimoForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('url_list_emprestimos')
+            # listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
+
+    return render(request, 'core/new_emprestimos.html', {'form': form})
+
+
+def edit_emprestimos(request, pk):
+    emprestimo = Emprestimo.objects.get(pk=pk)
+    form = EmprestimoForm(request.POST or None, instance=emprestimo)
+
+    if form.is_valid():
+        form.save()
+        return redirect('url_list_emprestimos')
+        #listagem(request) #repete o formulário e insere dado repetido pq na url fica com o nome /Nova
+
+    return render(request, 'core/edit_emprestimos.html', {'form': form})
+
+
+def delete_emprestimos(request, pk):
+    emprestimo = Emprestimo.objects.get(pk=pk)
+    emprestimo.delete()
+    return redirect('url_list_emprestimos')
 
 
 
